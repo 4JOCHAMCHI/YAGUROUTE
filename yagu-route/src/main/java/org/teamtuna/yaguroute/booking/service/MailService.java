@@ -1,4 +1,4 @@
-package org.teamtuna.yaguroute;
+package org.teamtuna.yaguroute.booking.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;

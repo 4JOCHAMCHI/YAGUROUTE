@@ -1,4 +1,4 @@
-package org.teamtuna.yaguroute;
+package org.teamtuna.yaguroute.booking.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -15,8 +15,9 @@ public class BookingController {
 
     @PostMapping("/")
     public String bookTicket(@RequestParam("ticketId") int ticketId) {
-        kafkaTemplate.send(TOPIC, String.valueOf(ticketId));
 
+        kafkaTemplate.send(TOPIC, String.valueOf(ticketId));
         return "발송 성공!";
     }
 }
+
