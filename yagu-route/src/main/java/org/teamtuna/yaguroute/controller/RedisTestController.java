@@ -11,7 +11,7 @@ public class RedisTestController {
 
     private final StringRedisTemplate redisTemplate;
 
-    @GetMapping("{key}:{ops}")
+    @GetMapping("{ops}:{key}")
     public String generateDummyData(
             @PathVariable("ops") String ops,
             @PathVariable("key") String key,
