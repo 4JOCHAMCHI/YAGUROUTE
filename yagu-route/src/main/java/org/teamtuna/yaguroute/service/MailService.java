@@ -1,4 +1,4 @@
-package org.teamtuna.yaguroute.service.booking;
+package org.teamtuna.yaguroute.service;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;

@@ -1,4 +1,4 @@
-package org.teamtuna.yaguroute.controller.booking;
+package org.teamtuna.yaguroute.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
