@@ -35,4 +35,7 @@ public class Game {
     @ManyToOne
     @JoinColumn(name = "away_team_id")
     private Team awayTeam;
+
+    @OneToOne(mappedBy = "game")
+    private Ticket ticket;
 }

@@ -34,6 +34,7 @@ public class Ticket {
     @Column(name = "seat_row")
     private int seatRow;
 
-    @OneToOne(mappedBy = "game")
+    @OneToOne
+    @JoinColumn(name = "game_id")
     private Game game;
 }

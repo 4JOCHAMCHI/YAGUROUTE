@@ -33,7 +33,7 @@ public class Team {
     @Column(name = "location")
     private String location;
 
-    @OneToOne(mappedBy = "member")
+    @OneToOne(mappedBy = "team")
     private Member member;
 
     @OneToMany(mappedBy = "homeTeam")
