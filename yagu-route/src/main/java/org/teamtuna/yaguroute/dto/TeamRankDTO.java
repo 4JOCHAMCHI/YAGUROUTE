@@ -7,10 +7,9 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class TeamDTO {
+public class TeamRankDTO {
+    private int teamRankId;
+    private int teamRank;
     private int teamId;
-    private String teamName;
-    private String logo;
-    private String stadium;
-    private String location;
+    private double gamesBehind;
 }
