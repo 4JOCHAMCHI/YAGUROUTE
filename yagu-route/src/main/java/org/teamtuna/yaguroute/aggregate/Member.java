@@ -53,3 +53,4 @@ public class Member {
         this.memberPhone = memberDTO.getMemberPhone();
     }
 }
+
