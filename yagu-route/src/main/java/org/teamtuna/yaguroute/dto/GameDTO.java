@@ -11,7 +11,6 @@ import java.sql.Date;
 @Getter
 @Setter
 @ToString
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class GameDTO {
     private int gameId;
     private Date gameDate;
