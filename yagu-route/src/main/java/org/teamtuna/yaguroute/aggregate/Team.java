@@ -1,19 +1,24 @@
 package org.teamtuna.yaguroute.aggregate;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-@Entity
-@Table(name = "team")
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Setter
 @ToString
+@Entity
+@Table(name = "team")
 public class Team {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "team_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int teamId;
 
     @Column(name = "team_name")
@@ -27,4 +32,13 @@ public class Team {
 
     @Column(name = "location")
     private String location;
+
+    @OneToOne(mappedBy = "team")
+    private Member member;
+
+    @OneToMany(mappedBy = "homeTeam")
+    private List<Game> homeGames;
+
+    @OneToMany(mappedBy = "awayTeam")
+    private List<Game> awayGames;
 }
