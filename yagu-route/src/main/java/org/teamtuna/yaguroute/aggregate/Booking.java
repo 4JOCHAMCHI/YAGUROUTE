@@ -32,3 +32,4 @@ public class Booking {
     @JoinColumn(name = "ticket_id")
     private Ticket ticket;
 }
+

@@ -39,3 +39,4 @@ public class Game {
     @OneToOne(mappedBy = "game")
     private Ticket ticket;
 }
+
