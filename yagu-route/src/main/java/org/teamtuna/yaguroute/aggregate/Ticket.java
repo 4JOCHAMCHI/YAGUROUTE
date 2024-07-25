@@ -38,3 +38,4 @@ public class Ticket {
     @JoinColumn(name = "game_id")
     private Game game;
 }
+
