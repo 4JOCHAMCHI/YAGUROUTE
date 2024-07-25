@@ -44,3 +44,4 @@ public class Member {
     @ToString.Exclude
     private List<Booking> bookingList = new ArrayList<>();
 }
+
