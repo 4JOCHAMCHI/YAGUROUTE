@@ -33,8 +33,8 @@ public class Team {
     @Column(name = "location")
     private String location;
 
-    @OneToOne(mappedBy = "team", fetch = FetchType.LAZY)
-    private Member member;
+    @Column(name = "seat_cnt")
+    private int seatCnt;
 
     @OneToMany(mappedBy = "homeTeam", fetch = FetchType.LAZY)
     private List<Game> homeGames;
