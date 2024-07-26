@@ -36,10 +36,6 @@ public class Member {
     @Column(name = "member_phone")
     private String memberPhone;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "team_id")
-    private Team team;
-
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     @JsonIgnore
     @ToString.Exclude

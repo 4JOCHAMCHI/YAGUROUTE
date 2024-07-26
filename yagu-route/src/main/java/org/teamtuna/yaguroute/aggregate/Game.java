@@ -36,6 +36,10 @@ public class Game {
     @JoinColumn(name = "away_team_id")
     private Team awayTeam;
 
+    @Column(name = "sellable")
+    @Enumerated(EnumType.STRING)
+    private Sellable sellable;
+
     @OneToOne(mappedBy = "game")
     private Ticket ticket;
 }
