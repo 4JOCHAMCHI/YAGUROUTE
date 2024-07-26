@@ -12,7 +12,7 @@ import java.sql.Time;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@ToString(exclude = {"homeTeam", "awayTeam", "ticket"})
+@ToString
 @Entity
 @Table(name = "game")
 public class Game {

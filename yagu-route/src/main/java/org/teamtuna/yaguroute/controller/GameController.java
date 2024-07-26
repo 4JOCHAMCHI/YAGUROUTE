@@ -9,7 +9,7 @@ import java.sql.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/games")
+@RequestMapping("/game")
 public class GameController {
 
     @Autowired
@@ -20,14 +20,14 @@ public class GameController {
         return gameService.getAllGames();
     }
 
-    @GetMapping("/date/{date}")
-    public List<GameDTO> getGamesByDate(@PathVariable String date) {
-        Date sqlDate = Date.valueOf(date); // Convert String to java.sql.Date
+    @GetMapping("/date")
+    public List<GameDTO> getGamesByDate(@RequestParam String date) {
+        Date sqlDate = Date.valueOf(date); 
         return gameService.getGamesByDate(sqlDate);
     }
 
-    @GetMapping("/team/{teamId}")
-    public List<GameDTO> getGamesByTeam(@PathVariable int teamId) {
+    @GetMapping("/team")
+    public List<GameDTO> getGamesByTeam(@RequestParam int teamId) {
         return gameService.getGamesByTeam(teamId);
     }
 
@@ -36,8 +36,8 @@ public class GameController {
         return gameService.getGameById(gameId);
     }
 
-    @GetMapping("/stadium/{stadium}")
-    public List<GameDTO> getGamesByStadium(@PathVariable String stadium) {
+    @GetMapping("/stadium")
+    public List<GameDTO> getGamesByStadium(@RequestParam String stadium) {
         return gameService.getGamesByStadium(stadium);
     }
 }
