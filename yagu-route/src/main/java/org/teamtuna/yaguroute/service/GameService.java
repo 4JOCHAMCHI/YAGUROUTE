@@ -2,6 +2,7 @@ package org.teamtuna.yaguroute.service;
 
 import org.springframework.stereotype.Service;
 import org.teamtuna.yaguroute.dto.GameDTO;
+import org.teamtuna.yaguroute.dto.GameDetailDTO;
 
 import java.sql.Date;
 import java.util.List;
@@ -12,4 +13,5 @@ public interface GameService {
     List<GameDTO> getGamesByTeam(int teamId);
     GameDTO getGameById(int gameId);
     List<GameDTO> getGamesByStadium(String stadium);
+    GameDetailDTO getGameDetailById(int gameId);
 }
