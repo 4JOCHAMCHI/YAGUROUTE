@@ -5,8 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.teamtuna.yaguroute.dto.BookingDTO;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,7 +23,7 @@ public class Booking {
     private int bookingId;
 
     @Column(name = "booking_date")
-    private Timestamp bookingDate;
+    private LocalDateTime bookingDate;
 
     @ManyToOne
     @JoinColumn(name = "member_id")
@@ -31,5 +32,16 @@ public class Booking {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ticket_id")
     private Ticket ticket;
+
+    @PrePersist
+    public void prePersist() {
+        this.bookingDate = LocalDateTime.now();
+    }
+
+    public Booking(BookingDTO bookingDTO) {
+        this.bookingDate = bookingDTO.getBookingDate();
+        this.member = bookingDTO.getMember();
+        this.ticket = bookingDTO.getTicket();
+    }
 }
 

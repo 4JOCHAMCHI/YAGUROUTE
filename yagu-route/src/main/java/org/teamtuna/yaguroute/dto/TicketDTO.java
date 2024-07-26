@@ -12,7 +12,7 @@ import org.teamtuna.yaguroute.aggregate.Ticket;
 public class TicketDTO {
 
     private int ticketId;
-    private int seatNum;
+    private String seatNum;
     private int price;
     private boolean isSold;
     private int seatCol;
@@ -22,7 +22,6 @@ public class TicketDTO {
     public TicketDTO(Ticket ticket) {
         this.ticketId = ticket.getTicketId();
         this.seatNum = ticket.getSeatNum();
-        this.price = ticket.getPrice();
         this.isSold = ticket.isSold();
         this.seatCol = ticket.getSeatCol();
         this.seatRow = ticket.getSeatRow();
