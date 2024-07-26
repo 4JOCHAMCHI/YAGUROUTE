@@ -36,9 +36,9 @@ public class Team {
     @Column(name = "seat_cnt")
     private int seatCnt;
 
-    @OneToMany(mappedBy = "homeTeam")
+    @OneToMany(mappedBy = "homeTeam", fetch = FetchType.LAZY)
     private List<Game> homeGames;
 
-    @OneToMany(mappedBy = "awayTeam")
+    @OneToMany(mappedBy = "awayTeam", fetch = FetchType.LAZY)
     private List<Game> awayGames;
 }
