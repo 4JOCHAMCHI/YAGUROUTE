@@ -41,6 +41,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 	implementation 'org.springframework.boot:spring-boot-starter-cache'
 	implementation 'org.apache.commons:commons-pool2'
+
+	implementation 'org.modelmapper:modelmapper:3.1.1'
+
+	runtimeOnly 'com.h2database:h2'
 }
 
 tasks.named('test') {

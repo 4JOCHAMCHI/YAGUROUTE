@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.teamtuna.yaguroute.dto.MemberDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,5 +44,13 @@ public class Member {
     @JsonIgnore
     @ToString.Exclude
     private List<Booking> bookingList = new ArrayList<>();
+
+    public Member(MemberDTO memberDTO) {
+        this.memberId = memberDTO.getMemberId();
+        this.memberName = memberDTO.getMemberName();
+        this.memberEmail = memberDTO.getMemberEmail();
+        this.memberPassword = memberDTO.getMemberPassword();
+        this.memberPhone = memberDTO.getMemberPhone();
+    }
 }
 
