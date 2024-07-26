@@ -35,4 +35,9 @@ public class GameController {
     public GameDTO getGameById(@PathVariable int gameId) {
         return gameService.getGameById(gameId);
     }
+
+    @GetMapping("/stadium/{stadium}")
+    public List<GameDTO> getGamesByStadium(@PathVariable String stadium) {
+        return gameService.getGamesByStadium(stadium);
+    }
 }

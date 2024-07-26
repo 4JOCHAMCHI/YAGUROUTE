@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@ToString
+@ToString(exclude = {"homeGames", "awayGames", "member"})
 @Entity
 @Table(name = "team")
 public class Team {
@@ -33,12 +33,12 @@ public class Team {
     @Column(name = "location")
     private String location;
 
-    @OneToOne(mappedBy = "team")
+    @OneToOne(mappedBy = "team", fetch = FetchType.LAZY)
     private Member member;
 
-    @OneToMany(mappedBy = "homeTeam")
+    @OneToMany(mappedBy = "homeTeam", fetch = FetchType.LAZY)
     private List<Game> homeGames;
 
-    @OneToMany(mappedBy = "awayTeam")
+    @OneToMany(mappedBy = "awayTeam", fetch = FetchType.LAZY)
     private List<Game> awayGames;
 }

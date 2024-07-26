@@ -12,7 +12,7 @@ import java.sql.Time;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@ToString
+@ToString(exclude = {"homeTeam", "awayTeam", "ticket"})
 @Entity
 @Table(name = "game")
 public class Game {
@@ -28,15 +28,15 @@ public class Game {
     @Column(name = "game_time")
     private Time gameTime;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "home_team_id")
     private Team homeTeam;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "away_team_id")
     private Team awayTeam;
 
-    @OneToOne(mappedBy = "game")
+    @OneToOne(mappedBy = "game", fetch = FetchType.LAZY)
     private Ticket ticket;
 }
 

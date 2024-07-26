@@ -1,5 +1,6 @@
 package org.teamtuna.yaguroute.service;
 
+import jakarta.transaction.Transactional;
 import org.teamtuna.yaguroute.aggregate.Game;
 import org.teamtuna.yaguroute.dto.GameDTO;
 import org.teamtuna.yaguroute.repository.GameRepository;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class GameServiceImpl implements GameService {
 
     @Autowired
@@ -74,4 +76,18 @@ public class GameServiceImpl implements GameService {
                 )
         ).orElse(null);
     }
+
+    @Override
+    public List<GameDTO> getGamesByStadium(String stadium) {
+        List<Game> games = gameRepository.findByStadium(stadium);
+        return games.stream().map(game -> new GameDTO(
+                game.getGameId(),
+                game.getGameDate(),
+                game.getGameTime(),
+                game.getHomeTeam().getTeamId(),
+                game.getAwayTeam().getTeamId()
+        )).collect(Collectors.toList());
+    }
+
+
 }
