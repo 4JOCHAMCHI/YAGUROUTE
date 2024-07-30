@@ -38,13 +38,5 @@ public class Member {
     @JsonIgnore
     @ToString.Exclude
     private List<Booking> bookingList = new ArrayList<>();
-
-//    public Member(MemberDTO memberDTO) {
-//        this.memberId = memberDTO.getMemberId();
-//        this.memberName = memberDTO.getMemberName();
-//        this.memberEmail = memberDTO.getMemberEmail();
-//        this.memberPassword = memberDTO.getMemberPassword();
-//        this.memberPhone = memberDTO.getMemberPhone();
-//    }
 }
 
