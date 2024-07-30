@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.teamtuna.yaguroute.dto.TicketDTO;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,7 +20,7 @@ public class Ticket {
     private int ticketId;
 
     @Column(name = "seat_num")
-    private String seatNum;
+    private int seatNum;
 
     @Column(name = "is_sold")
     private boolean isSold;
@@ -32,16 +31,12 @@ public class Ticket {
     @Column(name = "seat_row")
     private int seatRow;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "game_id")
     private Game game;
 
-    public Ticket(TicketDTO ticketDTO) {
-        this.seatNum = ticketDTO.getSeatNum();
-        this.isSold = ticketDTO.isSold();
-        this.seatCol = ticketDTO.getSeatCol();
-        this.seatRow = ticketDTO.getSeatRow();
-        this.game = ticketDTO.getGame();
+    public void setSold(boolean sold) {
+        isSold = sold;
     }
 }
 

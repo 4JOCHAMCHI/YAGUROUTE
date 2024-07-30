@@ -1,7 +1,6 @@
 package org.teamtuna.yaguroute.dto;
 
 import lombok.*;
-import org.teamtuna.yaguroute.aggregate.Game;
 import org.teamtuna.yaguroute.aggregate.Ticket;
 
 @NoArgsConstructor
@@ -12,12 +11,12 @@ import org.teamtuna.yaguroute.aggregate.Ticket;
 public class TicketDTO {
 
     private int ticketId;
-    private String seatNum;
+    private int seatNum;
     private int price;
     private boolean isSold;
     private int seatCol;
     private int seatRow;
-    private Game game;
+    private int gameId;
 
     public TicketDTO(Ticket ticket) {
         this.ticketId = ticket.getTicketId();
@@ -25,6 +24,6 @@ public class TicketDTO {
         this.isSold = ticket.isSold();
         this.seatCol = ticket.getSeatCol();
         this.seatRow = ticket.getSeatRow();
-        this.game = ticket.getGame();
+        this.gameId = ticket.getGame().getGameId();
     }
 }
