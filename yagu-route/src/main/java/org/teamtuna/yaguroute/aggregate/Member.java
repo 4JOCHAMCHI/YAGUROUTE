@@ -2,10 +2,7 @@ package org.teamtuna.yaguroute.aggregate;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.teamtuna.yaguroute.dto.MemberDTO;
 
 import java.util.ArrayList;
@@ -16,6 +13,7 @@ import java.util.List;
 @Getter
 @ToString
 @Entity
+@Builder
 @Table(name = "member")
 public class Member {
 
@@ -41,12 +39,12 @@ public class Member {
     @ToString.Exclude
     private List<Booking> bookingList = new ArrayList<>();
 
-    public Member(MemberDTO memberDTO) {
-        this.memberId = memberDTO.getMemberId();
-        this.memberName = memberDTO.getMemberName();
-        this.memberEmail = memberDTO.getMemberEmail();
-        this.memberPassword = memberDTO.getMemberPassword();
-        this.memberPhone = memberDTO.getMemberPhone();
-    }
+//    public Member(MemberDTO memberDTO) {
+//        this.memberId = memberDTO.getMemberId();
+//        this.memberName = memberDTO.getMemberName();
+//        this.memberEmail = memberDTO.getMemberEmail();
+//        this.memberPassword = memberDTO.getMemberPassword();
+//        this.memberPhone = memberDTO.getMemberPhone();
+//    }
 }
 
