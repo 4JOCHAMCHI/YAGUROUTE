@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.teamtuna.yaguroute.aggregate.Game;
 import org.teamtuna.yaguroute.dto.GameDTO;
+import org.teamtuna.yaguroute.dto.GameDetailDTO;
 import org.teamtuna.yaguroute.repository.GameRepository;
 
 import java.sql.Date;
@@ -56,5 +57,11 @@ public class GameServiceImpl implements GameService {
         return games.stream()
                 .map(game -> modelMapper.map(game, GameDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public GameDetailDTO getGameDetailById(int gameId) {
+        GameDetailDTO gameDetails = gameRepository.findGameDetailById(gameId);
+        return gameDetails;
     }
 }
