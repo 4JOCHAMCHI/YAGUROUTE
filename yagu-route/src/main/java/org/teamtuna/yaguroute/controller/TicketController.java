@@ -42,8 +42,8 @@ public class TicketController {
     }
 
     @GetMapping("/available/{gameId}")
-    public ResponseEntity<ResponseMessage> getAvailableSeat(@PathVariable("gameId") int gameId) {
-        List<TicketDTO> seatList = ticketService.getAvailableSeat(gameId);
+    public ResponseEntity<ResponseMessage> getAvailableSeats(@PathVariable("gameId") int gameId) {
+        List<TicketDTO> seatList = ticketService.getAvailableSeats(gameId);
 
         Map<String, Object> result = new HashMap<>();
         result.put("seats", seatList);
