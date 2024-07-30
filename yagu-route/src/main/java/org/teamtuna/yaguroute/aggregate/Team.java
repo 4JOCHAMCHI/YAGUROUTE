@@ -1,5 +1,6 @@
 package org.teamtuna.yaguroute.aggregate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,9 +37,13 @@ public class Team {
     @Column(name = "seat_cnt")
     private int seatCnt;
 
-    @OneToMany(mappedBy = "homeTeam", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "homeTeam")
+    @JsonIgnore
+    @ToString.Exclude
     private List<Game> homeGames;
 
-    @OneToMany(mappedBy = "awayTeam", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "awayTeam")
+    @JsonIgnore
+    @ToString.Exclude
     private List<Game> awayGames;
 }

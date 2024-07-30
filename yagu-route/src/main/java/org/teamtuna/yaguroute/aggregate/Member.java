@@ -36,7 +36,7 @@ public class Member {
     @Column(name = "member_phone")
     private String memberPhone;
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "member")
     @JsonIgnore
     @ToString.Exclude
     private List<Booking> bookingList = new ArrayList<>();

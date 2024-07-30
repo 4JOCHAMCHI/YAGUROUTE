@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.teamtuna.yaguroute.dto.BookingDTO;
 
 import java.time.LocalDateTime;
 
@@ -25,7 +24,7 @@ public class Booking {
     @Column(name = "booking_date")
     private LocalDateTime bookingDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
@@ -36,12 +35,6 @@ public class Booking {
     @PrePersist
     public void prePersist() {
         this.bookingDate = LocalDateTime.now();
-    }
-
-    public Booking(BookingDTO bookingDTO) {
-        this.bookingDate = bookingDTO.getBookingDate();
-        this.member = bookingDTO.getMember();
-        this.ticket = bookingDTO.getTicket();
     }
 }
 

@@ -16,13 +16,13 @@ public class BookingDTO {
 
     private int bookingId;
     private LocalDateTime bookingDate;
-    private Member member;
-    private Ticket ticket;
+    private int memberId;
+    private int ticketId;
 
     public BookingDTO(Booking booking) {
         this.bookingId = booking.getBookingId();
         this.bookingDate = booking.getBookingDate();
-        this.member = booking.getMember();
-        this.ticket = booking.getTicket();
+        this.memberId = booking.getMember().getMemberId();
+        this.ticketId = booking.getTicket().getTicketId();
     }
 }
