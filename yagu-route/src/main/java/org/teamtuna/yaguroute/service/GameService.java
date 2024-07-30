@@ -11,5 +11,5 @@ public interface GameService {
     List<GameDTO> getGamesByDate(Date date);
     List<GameDTO> getGamesByTeam(int teamId);
     GameDTO getGameById(int gameId);
-    List<GameDTO> getGamesByStadium(String stadium);
+     List<GameDTO> getGamesByStadium(String stadium);
 }
