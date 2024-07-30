@@ -19,7 +19,7 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @GetMapping("/all")
+    @GetMapping("all")
     public ResponseEntity<List<MemberDTO>> findAll() {
         List<MemberDTO> memberList = memberService.getAll();
 
@@ -34,5 +34,13 @@ public class MemberController {
         return member.map(value -> ResponseEntity.ok(new MemberDTO(value))).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
     }
 
+    @PostMapping("/signup")
+    public ResponseEntity<MemberDTO> addMember(@RequestBody MemberDTO memberDTO) {
+        boolean isComplete = memberService.addMember(memberDTO);
 
+        if (!isComplete)
+            return new ResponseEntity<>(new MemberDTO(), HttpStatus.BAD_REQUEST);
+
+        return ResponseEntity.ok(memberDTO);
+    }
 }

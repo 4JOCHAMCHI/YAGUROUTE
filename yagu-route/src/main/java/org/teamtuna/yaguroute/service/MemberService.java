@@ -9,5 +9,6 @@ import java.util.Optional;
 public interface MemberService {
     public Optional<Member> getMemberById(int memberId);
     public List<MemberDTO> getAll();
+    public boolean addMember(MemberDTO memberDTO);
 
 }
