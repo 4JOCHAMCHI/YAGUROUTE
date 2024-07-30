@@ -39,7 +39,7 @@ public class Member {
     @OneToMany(mappedBy = "member")
     @JsonIgnore
     @ToString.Exclude
-    private List<Booking> bookingList = new ArrayList<>();
+    private List<Ticket> ticketList = new ArrayList<>();
 
     public Member(MemberDTO memberDTO) {
         this.memberId = memberDTO.getMemberId();

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -19,24 +21,23 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ticketId;
 
-    @Column(name = "seat_num")
-    private int seatNum;
+    @Column(name = "ticket_date")
+    private LocalDateTime ticketDate;
 
-    @Column(name = "is_sold")
-    private boolean isSold;
-
-    @Column(name = "seat_col")
-    private int seatCol;
-
-    @Column(name = "seat_row")
-    private int seatRow;
+    @Column(name = "ticket_price")
+    private int ticketPrice;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "game_id")
-    private Game game;
+    @JoinColumn(name = "member_id")
+    private Member member;
 
-    public void setSold(boolean sold) {
-        isSold = sold;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "game_seat_id")
+    private GameSeat gameSeat;
+
+    @PrePersist
+    public void prePersist() {
+        this.ticketDate = LocalDateTime.now();
     }
 }
 

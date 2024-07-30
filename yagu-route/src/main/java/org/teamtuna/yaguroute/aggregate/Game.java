@@ -30,21 +30,21 @@ public class Game {
     @Column(name = "game_time")
     private Time gameTime;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "home_team_id")
-    private Team homeTeam;
-
-    @ManyToOne
-    @JoinColumn(name = "away_team_id")
-    private Team awayTeam;
-
     @Column(name = "sellable")
     @Enumerated(EnumType.STRING)
     private Sellable sellable;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "home_team_id")
+    private Team homeTeam;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "away_team_id")
+    private Team awayTeam;
+
     @OneToMany(mappedBy = "game")
     @JsonIgnore
     @ToString.Exclude
-    private List<Ticket> tickets;
+    private List<GameSeat> gameSeats;
 }
 
