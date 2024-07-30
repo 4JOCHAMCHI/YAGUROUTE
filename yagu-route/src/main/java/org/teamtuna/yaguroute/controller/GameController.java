@@ -42,7 +42,7 @@ public class GameController {
         return gameService.getGamesByStadium(stadium);
     }
 
-    @GetMapping("Detail/{gameId}")
+    @GetMapping("detail/{gameId}")
     public GameDetailDTO getGameDetailById(@PathVariable int gameId) {
         return gameService.getGameDetailById(gameId);
     }
