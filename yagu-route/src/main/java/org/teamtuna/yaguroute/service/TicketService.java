@@ -28,17 +28,13 @@ public class TicketService {
         // 캐시에 존재하지 않으면 DB 조회
         if (isOccupied == null || !isOccupied) {
             isOccupied = getTicketByGameIdAndSeatNumber(gameId, seatNumber).isSold();
-            System.out.println("DB 조회: " + isOccupied);
         }
-
-        System.out.println("캐시 조회:" + isOccupied);
 
         return isOccupied;
     }
 
     public boolean occupySeat(int gameId, int seatNumber, int ticketId) {
         redisTemplate.opsForSet().add(SET_KEY.concat(String.valueOf(gameId)), seatNumber);
-        System.out.println("캐시에 저장");
 
         Ticket ticket = convertToTicket(getTicketById(ticketId));
         ticket.setSold(true);
