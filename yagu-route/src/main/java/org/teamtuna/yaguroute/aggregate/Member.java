@@ -3,7 +3,6 @@ package org.teamtuna.yaguroute.aggregate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import org.teamtuna.yaguroute.dto.MemberDTO;
 
 import java.util.ArrayList;
 import java.util.List;
