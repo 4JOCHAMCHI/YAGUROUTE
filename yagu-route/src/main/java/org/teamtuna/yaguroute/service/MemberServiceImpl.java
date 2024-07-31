@@ -1,7 +1,8 @@
 package org.teamtuna.yaguroute.service;
 
 import org.modelmapper.ModelMapper;
-//import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.teamtuna.yaguroute.aggregate.Member;
 import org.teamtuna.yaguroute.dto.MemberDTO;
@@ -14,12 +15,12 @@ import java.util.Optional;
 public class MemberServiceImpl implements MemberService {
     private final ModelMapper modelMapper;
     private final MemberRepository memberRepository;
-//    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    public MemberServiceImpl(MemberRepository memberRepository, ModelMapper modelMapper) {//, PasswordEncoder passwordEncoder) {
+    public MemberServiceImpl(MemberRepository memberRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
         this.memberRepository = memberRepository;
         this.modelMapper = modelMapper;
-//        this.passwordEncoder = passwordEncoder;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -42,16 +43,20 @@ public class MemberServiceImpl implements MemberService {
         if (memberRepository.findByMemberEmail(memberDTO.getMemberEmail()) != null)
             return false;
 
-//        String encodedPassword = passwordEncoder.encode(memberDTO.getMemberPassword());
+        String encodedPassword = passwordEncoder.encode(memberDTO.getMemberPassword());
 
         Member member = Member
             .builder()
             .memberName(memberDTO.getMemberName())
             .memberEmail(memberDTO.getMemberEmail())
             .memberPhone(memberDTO.getMemberPhone())
-            .memberPassword(memberDTO.getMemberPassword())
-//                .memberPassword(encodedPassword)
+//            .memberPassword(memberDTO.getMemberPassword())
+            .memberPassword(encodedPassword)
             .build();
+
+        System.out.println(memberDTO.getMemberPassword());
+        System.out.println(encodedPassword);
+        System.out.println(member.getMemberPassword());
 
         memberRepository.save(member);
         return true;
