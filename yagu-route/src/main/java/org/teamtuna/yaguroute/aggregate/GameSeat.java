@@ -33,6 +33,13 @@ public class GameSeat {
     @JoinColumn(name = "seat_id")
     private Seat seat;
 
+    public GameSeat(boolean occupied, int gameSeatPrice, Game game, Seat seat) {
+        this.occupied = occupied;
+        this.gameSeatPrice = gameSeatPrice;
+        this.game = game;
+        this.seat = seat;
+    }
+
     public void setOccupied(boolean occupied) {
         this.occupied = occupied;
     }
