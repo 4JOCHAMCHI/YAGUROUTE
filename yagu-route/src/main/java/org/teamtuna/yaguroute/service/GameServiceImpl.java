@@ -1,11 +1,14 @@
 package org.teamtuna.yaguroute.service;
 
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.teamtuna.yaguroute.aggregate.Game;
+import org.teamtuna.yaguroute.aggregate.GameSeat;
 import org.teamtuna.yaguroute.dto.GameDTO;
 import org.teamtuna.yaguroute.dto.GameDetailDTO;
+import org.teamtuna.yaguroute.dto.GameStadiumDTO;
 import org.teamtuna.yaguroute.repository.GameRepository;
 
 import java.sql.Date;
@@ -52,16 +55,34 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public List<GameDTO> getGamesByStadium(String stadium) {
-        List<Game> games = gameRepository.findByStadium(stadium);
-        return games.stream()
-                .map(game -> modelMapper.map(game, GameDTO.class))
+    @Transactional
+    public List<GameStadiumDTO> getGamesByStadium(int stadiumId) {
+        return gameRepository.findByStadiumId(stadiumId).stream()
+                .map(game -> {
+                    GameStadiumDTO dto = modelMapper.map(game, GameStadiumDTO.class);
+                    dto.setHomeTeamId(game.getHomeTeam().getTeamId());
+                    dto.setHomeTeamName(game.getHomeTeam().getTeamName());
+                    dto.setAwayTeamId(game.getAwayTeam().getTeamId());
+                    dto.setAwayTeamName(game.getAwayTeam().getTeamName());
+                    dto.setStadiumName(game.getHomeTeam().getStadium().getStadiumName());
+                    dto.setStadiumLocation(game.getHomeTeam().getStadium().getLocation());
+                    return dto;
+                })
                 .collect(Collectors.toList());
     }
 
     @Override
-    public GameDetailDTO getGameDetailById(int gameId) {
-        GameDetailDTO gameDetails = gameRepository.findGameDetailById(gameId);
-        return gameDetails;
+    @Transactional
+    public GameDetailDTO getGameDetailsByGameSeatId(int gameSeatId) {
+        GameSeat gameSeat = gameRepository.findGameSeatDetailsById(gameSeatId);
+        GameDetailDTO gameDetailDTO = modelMapper.map(gameSeat.getGame(), GameDetailDTO.class);
+        gameDetailDTO.setHomeTeamName(gameSeat.getGame().getHomeTeam().getTeamName());
+        gameDetailDTO.setAwayTeamName(gameSeat.getGame().getAwayTeam().getTeamName());
+        gameDetailDTO.setStadiumName(gameSeat.getGame().getHomeTeam().getStadium().getStadiumName());
+        gameDetailDTO.setLocation(gameSeat.getGame().getHomeTeam().getStadium().getLocation());
+        gameDetailDTO.setSeatNum(String.valueOf(gameSeat.getSeat().getSeatNum()));
+        return gameDetailDTO;
     }
+
+
 }
