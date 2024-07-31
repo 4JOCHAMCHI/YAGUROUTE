@@ -33,7 +33,6 @@ public class GameSeatService {
         if (isOccupied == null || !isOccupied) {
             try {
                 isOccupied = getTicketByGameIdAndSeatId(gameId, seatId).isOccupied();
-
             } catch (EntityNotFoundException e) {
                 isOccupied = false;
             }
