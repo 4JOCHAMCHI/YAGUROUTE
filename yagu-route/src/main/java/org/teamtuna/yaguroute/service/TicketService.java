@@ -44,10 +44,6 @@ public class TicketService {
             Ticket ticket = new Ticket(0, null, gameSeat.getGameSeatPrice(), member, gameSeat);
             TicketDTO result = new TicketDTO(ticketRepository.save(ticket));
 
-            System.out.println(member);
-            System.out.println(gameSeat);
-            System.out.println(ticket);
-
             gameSeatService.occupySeat(gameId, seatId);
             getMailInfo(memberId, ticket.getTicketId());
 
