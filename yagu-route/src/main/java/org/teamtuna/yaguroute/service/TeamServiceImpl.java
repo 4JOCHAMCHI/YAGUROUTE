@@ -39,7 +39,7 @@ public class TeamServiceImpl implements TeamService {
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
         storage.create(blobInfo, file.getInputStream());
 
-        URL url = storage.signUrl(blobInfo, 365, TimeUnit.DAYS);  // 1년 동안 유효한 URL 생성
+        URL url = storage.signUrl(blobInfo, 365, TimeUnit.DAYS); 
 
         Team team = teamRepository.findById(teamId).orElseThrow(() -> new RuntimeException("Team not found"));
         team = new Team(team.getTeamId(), team.getTeamName(), url.toString(), team.getStadium(), team.getHomeGames(), team.getAwayGames());

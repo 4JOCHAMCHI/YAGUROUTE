@@ -133,15 +133,15 @@ public class GameServiceImpl implements GameService {
         for (Game game : pastGames) {
             List<GameSeat> gameSeats = gameSeatRepository.findByGame_GameId(game.getGameId());
 
-            // 먼저 ticket 테이블에서 game_seat_id를 참조하는 레코드 삭제
+            // game_seat_id를 참조하는 레코드 삭제
             for (GameSeat gameSeat : gameSeats) {
                 ticketRepository.deleteByGameSeat(gameSeat);
             }
 
-            // 그런 다음 gameSeat 레코드 삭제
+            // gameSeat 레코드 삭제
             gameSeatRepository.deleteByGame(game);
 
-            // 마지막으로 game 레코드 삭제
+            //game 레코드 삭제
             gameRepository.delete(game);
         }
     }
@@ -165,7 +165,7 @@ public class GameServiceImpl implements GameService {
     }
 
     @Transactional
-    @Scheduled(cron = "0 15 9 * * ?") // 매일 10시에 실행 (예시)
+    @Scheduled(cron = "0 15 9 * * ?")
     public void updateNewGameSchedules() {
         List<Game> newGames = fetchNewGames();
         updateGameSeatsForNewGame(newGames);
