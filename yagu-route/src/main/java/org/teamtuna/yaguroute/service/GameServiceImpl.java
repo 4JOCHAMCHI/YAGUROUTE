@@ -15,6 +15,7 @@ import org.teamtuna.yaguroute.dto.GameStadiumDTO;
 import org.teamtuna.yaguroute.repository.GameRepository;
 import org.teamtuna.yaguroute.repository.GameSeatRepository;
 import org.teamtuna.yaguroute.repository.SeatRepository;
+import org.teamtuna.yaguroute.repository.TicketRepository;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -29,6 +30,9 @@ public class GameServiceImpl implements GameService {
 
     @Autowired
     private GameSeatRepository gameSeatRepository;
+
+    @Autowired
+    private TicketRepository ticketRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -98,7 +102,7 @@ public class GameServiceImpl implements GameService {
     }
 
     @Transactional
-    @Scheduled(cron = "0 50 16 * * ?")
+    @Scheduled(cron = "0 0 9 * * ?")
     public void generateGameSeatsForSellableGames() {
         LocalDate today = LocalDate.now();
         if(lastDate == null || !lastDate.equals(today)) {
@@ -121,13 +125,23 @@ public class GameServiceImpl implements GameService {
     }
 
     @Transactional
-    @Scheduled(cron = "0 5 9 * * ?")
-    public void removePastGamesAndSeats(){
+    @Scheduled(cron = "0 10 9 * * ?")
+    public void removePastGamesAndSeats() {
         LocalDate today = LocalDate.now();
         List<Game> pastGames = gameRepository.findByGameDateBefore(today);
 
-        for(Game game : pastGames) {
+        for (Game game : pastGames) {
+            List<GameSeat> gameSeats = gameSeatRepository.findByGame_GameId(game.getGameId());
+
+            // 먼저 ticket 테이블에서 game_seat_id를 참조하는 레코드 삭제
+            for (GameSeat gameSeat : gameSeats) {
+                ticketRepository.deleteByGameSeat(gameSeat);
+            }
+
+            // 그런 다음 gameSeat 레코드 삭제
             gameSeatRepository.deleteByGame(game);
+
+            // 마지막으로 game 레코드 삭제
             gameRepository.delete(game);
         }
     }
