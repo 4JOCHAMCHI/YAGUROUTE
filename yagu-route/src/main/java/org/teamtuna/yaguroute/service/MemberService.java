@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MemberService {
-    public Optional<Member> getMemberById(int memberId);
-    public List<MemberDTO> getAll();
+    Optional<Member> getMemberById(int memberId);
+    List<MemberDTO> getAll();
 
 }
