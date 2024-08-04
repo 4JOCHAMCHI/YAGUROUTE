@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface MemberService {
     public Optional<Member> getMemberById(int memberId);
+    public Optional<Member> getMemberByEmail(String memberEmail);
     public List<MemberDTO> getAll();
     public boolean addMember(MemberDTO memberDTO);
 

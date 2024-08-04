@@ -1,7 +1,6 @@
 package org.teamtuna.yaguroute.service;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.teamtuna.yaguroute.aggregate.Member;
@@ -29,6 +28,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public Optional<Member> getMemberByEmail(String memberEmail) {
+        return Optional.ofNullable(memberRepository.findByMemberEmail(memberEmail));
+    }
+
+    @Override
     public List<MemberDTO> getAll() {
         List<Member> memberList =  memberRepository.findAll();
         List<MemberDTO> memberDTOList = memberList.stream()
@@ -50,13 +54,8 @@ public class MemberServiceImpl implements MemberService {
             .memberName(memberDTO.getMemberName())
             .memberEmail(memberDTO.getMemberEmail())
             .memberPhone(memberDTO.getMemberPhone())
-//            .memberPassword(memberDTO.getMemberPassword())
             .memberPassword(encodedPassword)
             .build();
-
-        System.out.println(memberDTO.getMemberPassword());
-        System.out.println(encodedPassword);
-        System.out.println(member.getMemberPassword());
 
         memberRepository.save(member);
         return true;
