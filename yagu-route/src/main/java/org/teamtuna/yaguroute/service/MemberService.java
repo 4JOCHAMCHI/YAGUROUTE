@@ -11,5 +11,5 @@ public interface MemberService {
     public Optional<Member> getMemberByEmail(String memberEmail);
     public List<MemberDTO> getAll();
     public boolean addMember(MemberDTO memberDTO);
-
+    void updateMemberPhone(String email, String phone);
 }

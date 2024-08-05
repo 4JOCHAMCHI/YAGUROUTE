@@ -1,5 +1,6 @@
 package org.teamtuna.yaguroute.service;
 
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -59,5 +60,14 @@ public class MemberServiceImpl implements MemberService {
 
         memberRepository.save(member);
         return true;
+    }
+
+    @Override
+    @Transactional
+    public void updateMemberPhone(String email, String newPhoneNumber) {
+        Member member = memberRepository.findByMemberEmail(email);
+        member.updateProfile(newPhoneNumber);
+
+        System.out.println(member.getMemberPhone());
     }
 }

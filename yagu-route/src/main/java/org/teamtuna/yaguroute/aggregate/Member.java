@@ -37,5 +37,9 @@ public class Member {
     @JsonIgnore
     @ToString.Exclude
     private List<Booking> bookingList = new ArrayList<>();
+
+    public void updateProfile(String memberPhone) {
+        this.memberPhone = memberPhone;
+    }
 }
 
