@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public interface MemberService {
     Optional<Member> getMemberById(int memberId);
+    Optional<Member> getMemberByEmail(String memberEmail);
     List<MemberDTO> getAll();
-
+    boolean addMember(MemberDTO memberDTO);
+    void updateMemberPhone(String email, String phone);
 }
