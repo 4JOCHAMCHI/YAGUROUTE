@@ -1,5 +1,6 @@
 package org.teamtuna.yaguroute.aggregate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.ToString;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,6 +30,10 @@ public class Game {
     @Column(name = "game_time")
     private Time gameTime;
 
+    @Column(name = "sellable")
+    @Enumerated(EnumType.STRING)
+    private Sellable sellable;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "home_team_id")
     private Team homeTeam;
@@ -36,11 +42,9 @@ public class Game {
     @JoinColumn(name = "away_team_id")
     private Team awayTeam;
 
-    @Column(name = "sellable")
-    @Enumerated(EnumType.STRING)
-    private Sellable sellable;
-
-    @OneToOne(mappedBy = "game")
-    private Ticket ticket;
+    @OneToMany(mappedBy = "game")
+    @JsonIgnore
+    @ToString.Exclude
+    private List<GameSeat> gameSeats;
 }
 

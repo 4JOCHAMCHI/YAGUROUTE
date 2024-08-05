@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MemberService {
-    public Optional<Member> getMemberById(int memberId);
-    public Optional<Member> getMemberByEmail(String memberEmail);
-    public List<MemberDTO> getAll();
-    public boolean addMember(MemberDTO memberDTO);
+    Optional<Member> getMemberById(int memberId);
+    Optional<Member> getMemberByEmail(String memberEmail);
+    List<MemberDTO> getAll();
+    boolean addMember(MemberDTO memberDTO);
     void updateMemberPhone(String email, String phone);
 }

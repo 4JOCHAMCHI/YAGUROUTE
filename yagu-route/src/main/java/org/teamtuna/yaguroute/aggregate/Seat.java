@@ -14,31 +14,32 @@ import java.util.List;
 @Getter
 @ToString
 @Entity
-@Table(name = "team")
-public class Team {
+@Table(name = "seat")
+public class Seat {
 
     @Id
-    @Column(name = "team_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int teamId;
+    @Column(name = "seat_id")
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    private int seatId;
 
-    @Column(name = "team_name")
-    private String teamName;
+    @Column(name = "seat_num")
+    private int seatNum;
 
-    @Column(name = "logo")
-    private String logo;
+    @Column(name = "seat_col")
+    private int seatCol;
+
+    @Column(name = "seat_row")
+    private int seatRow;
+
+    @Column(name = "seat_status")
+    private boolean seatStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "stadium_id")
     private Stadium stadium;
 
-    @OneToMany(mappedBy = "homeTeam")
+    @OneToMany(mappedBy = "seat")
     @JsonIgnore
     @ToString.Exclude
-    private List<Game> homeGames;
-
-    @OneToMany(mappedBy = "awayTeam")
-    @JsonIgnore
-    @ToString.Exclude
-    private List<Game> awayGames;
+    private List<GameSeat> gameSeats;
 }

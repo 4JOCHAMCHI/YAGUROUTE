@@ -5,7 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.teamtuna.yaguroute.dto.TicketDTO;
+
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,28 +21,23 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ticketId;
 
-    @Column(name = "seat_num")
-    private String seatNum;
+    @Column(name = "ticket_date")
+    private LocalDateTime ticketDate;
 
-    @Column(name = "is_sold")
-    private boolean isSold;
+    @Column(name = "ticket_price")
+    private int ticketPrice;
 
-    @Column(name = "seat_col")
-    private int seatCol;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
 
-    @Column(name = "seat_row")
-    private int seatRow;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "game_seat_id")
+    private GameSeat gameSeat;
 
-    @OneToOne
-    @JoinColumn(name = "game_id")
-    private Game game;
-
-    public Ticket(TicketDTO ticketDTO) {
-        this.seatNum = ticketDTO.getSeatNum();
-        this.isSold = ticketDTO.isSold();
-        this.seatCol = ticketDTO.getSeatCol();
-        this.seatRow = ticketDTO.getSeatRow();
-        this.game = ticketDTO.getGame();
+    @PrePersist
+    public void prePersist() {
+        this.ticketDate = LocalDateTime.now();
     }
 }
 

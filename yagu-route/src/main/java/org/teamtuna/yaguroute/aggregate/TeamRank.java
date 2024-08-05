@@ -19,7 +19,7 @@ public class TeamRank {
     @Column(name = "team_rank")
     private int teamRank;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id", referencedColumnName = "team_id")
     private Team team;
 

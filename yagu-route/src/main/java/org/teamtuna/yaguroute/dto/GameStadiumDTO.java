@@ -11,11 +11,15 @@ import java.sql.Date;
 @Getter
 @Setter
 @ToString
-public class GameDTO {
+public class GameStadiumDTO {
     private int gameId;
     private Date gameDate;
     private Time gameTime;
     private Sellable sellable;
     private int homeTeamId;
+    private String homeTeamName;
     private int awayTeamId;
+    private String awayTeamName;
+    private String stadiumName;
+    private String stadiumLocation;
 }
