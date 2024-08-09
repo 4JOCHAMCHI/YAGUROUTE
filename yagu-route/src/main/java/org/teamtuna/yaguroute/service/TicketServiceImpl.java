@@ -25,7 +25,6 @@ public class TicketServiceImpl implements TicketService{
 
     private final KafkaTemplate<String, MailDTO> kafkaTemplate;
     private static final String TOPIC = "tickets";
-    private static final String DLQ = "email-dlq";
 
     public Ticket converToTicket(TicketDTO ticketDTO) {
         return ticketRepository.findById(ticketDTO.getTicketId()).orElseThrow(() -> new EntityNotFoundException("Ticket not found"));
@@ -39,7 +38,7 @@ public class TicketServiceImpl implements TicketService{
     public TicketDTO bookTicket(int memberId, int gameId, int seatId) {
         if (!gameSeatService.isSeatOccupied(gameId, seatId)) {
             Member member = memberService.getMemberById(memberId).orElseThrow(() -> new EntityNotFoundException("Member Not Found"));
-            GameSeat gameSeat = gameSeatService.convertToGameSeat(gameSeatService.getTicketByGameIdAndSeatId(gameId, seatId));
+            GameSeat gameSeat = gameSeatService.convertToGameSeat(gameSeatService.getGameSeatByGameIdAndSeatId(gameId, seatId));
 
             Ticket ticket = new Ticket(0, null, gameSeat.getGameSeatPrice(), member, gameSeat);
             TicketDTO result = new TicketDTO(ticketRepository.save(ticket));
@@ -49,6 +48,7 @@ public class TicketServiceImpl implements TicketService{
 
             return result;
         }
+
         throw new RuntimeException("예매 불가");
     }
 

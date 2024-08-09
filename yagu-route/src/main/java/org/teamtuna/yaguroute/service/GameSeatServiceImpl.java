@@ -32,7 +32,7 @@ public class GameSeatServiceImpl implements GameSeatService{
         // 캐시에 존재하지 않으면 DB 조회
         if (isOccupied == null || !isOccupied) {
             try {
-                isOccupied = getTicketByGameIdAndSeatId(gameId, seatId).isOccupied();
+                isOccupied = getGameSeatByGameIdAndSeatId(gameId, seatId).isOccupied();
             } catch (EntityNotFoundException e) {
                 isOccupied = false;
             }
@@ -44,7 +44,7 @@ public class GameSeatServiceImpl implements GameSeatService{
     public GameSeatDTO occupySeat(int gameId, int seatId) {
         redisTemplate.opsForSet().add(SET_KEY.concat(String.valueOf(gameId)), seatId);
 
-        GameSeat gameSeat = convertToGameSeat(getTicketByGameIdAndSeatId(gameId, seatId));
+        GameSeat gameSeat = convertToGameSeat(getGameSeatByGameIdAndSeatId(gameId, seatId));
         gameSeat.setOccupied(true);
 
         return new GameSeatDTO(gameSeatRepository.save(gameSeat));
@@ -66,7 +66,7 @@ public class GameSeatServiceImpl implements GameSeatService{
         return new SeatDTO(seatRepository.findById(seatId).orElseThrow(() -> new EntityNotFoundException("Seat not found")));
     }
 
-    public GameSeatDTO getTicketByGameIdAndSeatId(int gameId, int seatId) {
+    public GameSeatDTO getGameSeatByGameIdAndSeatId(int gameId, int seatId) {
         return new GameSeatDTO(gameSeatRepository.findByGame_GameIdAndSeat_SeatId(gameId, seatId).orElseThrow(()-> new EntityNotFoundException("Ticket not found")));
     }
 

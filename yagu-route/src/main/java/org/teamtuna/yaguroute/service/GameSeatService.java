@@ -15,6 +15,6 @@ public interface GameSeatService {
     GameSeatDTO occupySeat(int gameId, int seatId);
     List<GameSeatDTO> getAllSeats(int gameId);
     SeatDTO getSeatById(int seatId);
-    GameSeatDTO getTicketByGameIdAndSeatId(int gameId, int seatId);
+    GameSeatDTO getGameSeatByGameIdAndSeatId(int gameId, int seatId);
     List<GameSeatDTO> getAvailableSeats(int gameId);
 }
