@@ -42,6 +42,7 @@ jobs:
         pwd
         ls -al
         ./gradlew bootJar
+        ls -al build/libs
         docker build -t yaguroute-app .
         
     - name: Tagging created image and push
