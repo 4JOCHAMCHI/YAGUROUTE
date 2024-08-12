@@ -2,9 +2,9 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ "feature/workflow" ]
+    branches: [ "feature/workflow-1" ]
   pull_request:
-    branches: [ "feature/workflow" ]
+    branches: [ "feature/workflow-1" ]
 
 jobs:
   build:
