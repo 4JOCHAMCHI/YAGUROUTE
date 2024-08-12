@@ -53,4 +53,4 @@ jobs:
         docker login -u "$DOCKER_ID" -p "$DOCKER_PWD"
         imagename="$DOCKER_ID"/yaguroute-app:$(date +%s)
         docker image tag yaguroute-app $imagename
-        docker push $imagename
+        docker push $imagename 
