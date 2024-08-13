@@ -33,11 +33,9 @@ jobs:
 
     - name: set application.yml
       run: |
-        # mkdir -p yagu-route/src/main/resources
-        # echo "${{ secrets.APPLICATION_YML }}" | base64 --decode > src/main/resources/application.yml
-        # find src
-        pwd
-        ls -al
+        mkdir -p yagu-route/src/main/resources
+        echo "${{ secrets.APPLICATION_YML }}" | base64 --decode > src/main/resources/application.yml
+        find yagu-route/src
 
     - name: Print working directory 
       run: |
