@@ -31,6 +31,12 @@ jobs:
     - name: Check gradle version
       run: gradle --version
 
+    - name: set application.yml
+      run: |
+        mkdir -p src/main/resources
+        echo "${{ secrets.APPLICATION_YML }}" | base64 --decode > src/main/resources/application.yml
+        find src
+
     - name: Print working directory 
       run: |
         pwd
