@@ -70,7 +70,7 @@ class GameSeatServiceTest {
     @Test
     @DisplayName("경기별 전체 좌석 조회")
     void getAllSeats() {
-        List<GameSeatDTO> gameSeats = gameSeatService.getAllSeats(1);
+        List<SeatDTO> gameSeats = gameSeatService.getAllSeats(1);
 
         assertEquals(3, gameSeats.size());
     }
@@ -95,9 +95,9 @@ class GameSeatServiceTest {
 
     @Test
     @DisplayName("예매 가능 좌석 조회")
-    void getAvailableSeats() {
-        List<GameSeatDTO> gameSeats = gameSeatService.getAvailableSeats(1);
+    void getOccupiedSeats() {
+        List<GameSeatDTO> gameSeats = gameSeatService.getOccupiedSeats(1);
 
-        assertEquals(3, gameSeats.size());
+        assertEquals(0, gameSeats.size());
     }
 }

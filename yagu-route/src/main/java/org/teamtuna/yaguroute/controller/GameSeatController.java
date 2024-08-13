@@ -28,7 +28,7 @@ public class GameSeatController {
     @GetMapping("/all/{gameId}")
     @Operation(summary = "경기별 좌석 전체 조회", description = "경기별 전체 좌석 목록을 조회합니다.")
     public ResponseEntity<ResponseMessage> getAllSeats(@PathVariable("gameId") int gameId) {
-        List<GameSeatDTO> seatDTOList = gameSeatService.getAllSeats(gameId);
+        List<SeatDTO> seatDTOList = gameSeatService.getAllSeats(gameId);
 
         Map<String, Object> result = new HashMap<>();
         result.put("allSeats", seatDTOList);
@@ -47,10 +47,10 @@ public class GameSeatController {
         return ResponseEntity.ok().body(new ResponseMessage(200, "좌석 상세 조회 성공", result));
     }
 
-    @GetMapping("/available/{gameId}")
-    @Operation(summary = "경기별 예매 가능 좌석 조회", description = "경기별 예매 가능 좌석 목록을 조회합니다.")
+    @GetMapping("/occupied/{gameId}")
+    @Operation(summary = "경기별 예매 불가 좌석 조회", description = "경기별 예매 불가 좌석 목록을 조회합니다.")
     public ResponseEntity<ResponseMessage> getAvailableSeats(@PathVariable("gameId") int gameId) {
-        List<GameSeatDTO> seatList = gameSeatService.getAvailableSeats(gameId);
+        List<GameSeatDTO> seatList = gameSeatService.getOccupiedSeats(gameId);
 
         Map<String, Object> result = new HashMap<>();
         result.put("seats", seatList);

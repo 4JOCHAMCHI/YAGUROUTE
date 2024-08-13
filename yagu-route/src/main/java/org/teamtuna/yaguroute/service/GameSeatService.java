@@ -13,8 +13,8 @@ public interface GameSeatService {
     Seat convertToSeat(SeatDTO seatDTO);
     boolean isSeatOccupied(int gameId, int seatId);
     GameSeatDTO occupySeat(int gameId, int seatId);
-    List<GameSeatDTO> getAllSeats(int gameId);
+    List<SeatDTO> getAllSeats(int gameId);
     SeatDTO getSeatById(int seatId);
     GameSeatDTO getGameSeatByGameIdAndSeatId(int gameId, int seatId);
-    List<GameSeatDTO> getAvailableSeats(int gameId);
+    List<GameSeatDTO> getOccupiedSeats(int gameId);
 }

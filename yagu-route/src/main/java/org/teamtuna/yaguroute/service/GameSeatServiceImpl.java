@@ -54,10 +54,6 @@ public class GameSeatServiceImpl implements GameSeatService{
         return gameSeatRepository.findById(gameSeatDTO.getGameSeatId()).orElseThrow(() -> new EntityNotFoundException("GameSeat not found"));
     }
 
-    public List<GameSeatDTO> getAllSeats(int gameId) {
-        return gameSeatRepository.findByGame_GameId(gameId).stream().map(GameSeatDTO::new).collect(Collectors.toList());
-    }
-
     public Seat convertToSeat(SeatDTO seatDTO) {
         return seatRepository.findById(seatDTO.getSeatId()).orElseThrow(() -> new EntityNotFoundException("Seat not found"));
     }
@@ -66,11 +62,19 @@ public class GameSeatServiceImpl implements GameSeatService{
         return new SeatDTO(seatRepository.findById(seatId).orElseThrow(() -> new EntityNotFoundException("Seat not found")));
     }
 
+    public List<SeatDTO> getAllSeats(int gameId) {
+        return seatRepository.findAllSeatsByGameId(gameId).stream().map(SeatDTO::new).collect(Collectors.toList());
+    }
+
+    public List<GameSeatDTO> getAllGameSeats(int gameId) {
+        return gameSeatRepository.findByGame_GameId(gameId).stream().map(GameSeatDTO::new).collect(Collectors.toList());
+    }
+
     public GameSeatDTO getGameSeatByGameIdAndSeatId(int gameId, int seatId) {
         return new GameSeatDTO(gameSeatRepository.findByGame_GameIdAndSeat_SeatId(gameId, seatId).orElseThrow(()-> new EntityNotFoundException("Ticket not found")));
     }
 
-    public List<GameSeatDTO> getAvailableSeats(int gameId) {
-        return gameSeatRepository.findByGame_GameIdAndOccupiedFalse(gameId).stream().map(GameSeatDTO::new).collect(Collectors.toList());
+    public List<GameSeatDTO> getOccupiedSeats(int gameId) {
+        return gameSeatRepository.findByGame_GameIdAndOccupiedTrue(gameId).stream().map(GameSeatDTO::new).collect(Collectors.toList());
     }
 }
