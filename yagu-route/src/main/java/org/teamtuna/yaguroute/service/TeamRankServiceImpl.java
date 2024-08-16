@@ -26,6 +26,7 @@ public class TeamRankServiceImpl implements TeamRankService {
                     teamRank.getTeamRankId(),
                     teamRank.getTeamRank(),
                     teamRank.getTeam().getTeamId(),
+                    teamRank.getTeam().getTeamName(),
                     teamRank.getGamesBehind()
             );
             System.out.println("TeamRankDTO: " + teamRankDTO);

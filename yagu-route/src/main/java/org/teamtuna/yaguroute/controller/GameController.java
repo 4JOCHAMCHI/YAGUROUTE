@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.teamtuna.yaguroute.dto.GameDTO;
 import org.teamtuna.yaguroute.dto.GameDetailDTO;
 import org.teamtuna.yaguroute.dto.GameStadiumDTO;
+import org.teamtuna.yaguroute.dto.GameSummaryDTO;
 import org.teamtuna.yaguroute.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,11 +21,11 @@ public class GameController {
     @Autowired
     private GameService gameService;
 
-    @Operation(summary = "경기일정 전체 조회", description = "모든 경기일정을 조회합니다.")
-    @GetMapping
-    public List<GameDTO> getAllGames() {
-        return gameService.getAllGames();
-    }
+//    @Operation(summary = "경기일정 전체 조회", description = "모든 경기일정을 조회합니다.")
+//    @GetMapping
+//    public List<GameDTO> getAllGames() {
+//        return gameService.getAllGames();
+//    }
 
     @Operation(summary = "날짜별 경기일정 조회", description = "특정 날짜에 열리는 경기일정을 조회합니다.")
     @GetMapping("/date")
@@ -55,5 +56,11 @@ public class GameController {
     @GetMapping("/details/{gameSeatId}")
     public GameDetailDTO getGameDetailsByGameSeatId(@PathVariable("gameSeatId") int gameSeatId) {
         return gameService.getGameDetailsByGameSeatId(gameSeatId);
+    }
+
+    @Operation(summary = "경기일정 전체 조회", description = "모든 경기일정을 조회합니다.")
+    @GetMapping("/all")
+    public List<GameSummaryDTO> getAllGames() {
+        return gameService.getAllGamesWithSummary();
     }
 }

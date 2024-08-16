@@ -11,5 +11,6 @@ public class TeamRankDTO {
     private int teamRankId;
     private int teamRank;
     private int teamId;
+    private String teamName;
     private double gamesBehind;
 }
