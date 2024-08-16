@@ -2,10 +2,7 @@ package org.teamtuna.yaguroute.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.teamtuna.yaguroute.dto.GameDTO;
-import org.teamtuna.yaguroute.dto.GameDetailDTO;
-import org.teamtuna.yaguroute.dto.GameStadiumDTO;
-import org.teamtuna.yaguroute.dto.GameSummaryDTO;
+import org.teamtuna.yaguroute.dto.*;
 import org.teamtuna.yaguroute.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -62,5 +59,11 @@ public class GameController {
     @GetMapping("/all")
     public List<GameSummaryDTO> getAllGames() {
         return gameService.getAllGamesWithSummary();
+    }
+
+    @Operation(summary = "팀 이름 조회", description = "특정 경기 ID를 통해 홈팀과 어웨이팀의 이름을 조회합니다.")
+    @GetMapping("/teams/{gameId}")
+    public GameTeamDTO getTeamsByGameId(@PathVariable int gameId) {
+        return gameService.getTeamsByGameId(gameId);
     }
 }
