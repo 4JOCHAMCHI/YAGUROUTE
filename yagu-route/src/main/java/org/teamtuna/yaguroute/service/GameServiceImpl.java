@@ -11,10 +11,7 @@ import org.teamtuna.yaguroute.aggregate.Game;
 import org.teamtuna.yaguroute.aggregate.GameSeat;
 import org.teamtuna.yaguroute.aggregate.Seat;
 import org.teamtuna.yaguroute.aggregate.Sellable;
-import org.teamtuna.yaguroute.dto.GameDTO;
-import org.teamtuna.yaguroute.dto.GameDetailDTO;
-import org.teamtuna.yaguroute.dto.GameStadiumDTO;
-import org.teamtuna.yaguroute.dto.GameSummaryDTO;
+import org.teamtuna.yaguroute.dto.*;
 import org.teamtuna.yaguroute.repository.GameRepository;
 import org.teamtuna.yaguroute.repository.GameSeatRepository;
 import org.teamtuna.yaguroute.repository.SeatRepository;
@@ -197,5 +194,16 @@ public class GameServiceImpl implements GameService {
     @Override
     public List<GameSummaryDTO> getAllGamesWithSummary() {
         return gameRepository.findAllGamesWithSummary();
+    }
+
+    @Override
+    @Transactional
+    public GameTeamDTO getTeamsByGameId(int gameId) {
+        Game game = gameRepository.findById(gameId)
+                .orElseThrow(() -> new RuntimeException("Game not found"));
+        GameTeamDTO gameTeamsDTO = new GameTeamDTO();
+        gameTeamsDTO.setHomeTeamName(game.getHomeTeam().getTeamName());
+        gameTeamsDTO.setAwayTeamName(game.getAwayTeam().getTeamName());
+        return gameTeamsDTO;
     }
 }

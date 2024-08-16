@@ -1,8 +1,5 @@
 package org.teamtuna.yaguroute.service;
-import org.teamtuna.yaguroute.dto.GameDTO;
-import org.teamtuna.yaguroute.dto.GameDetailDTO;
-import org.teamtuna.yaguroute.dto.GameStadiumDTO;
-import org.teamtuna.yaguroute.dto.GameSummaryDTO;
+import org.teamtuna.yaguroute.dto.*;
 
 
 import java.sql.Date;
@@ -16,4 +13,5 @@ public interface GameService {
     List<GameStadiumDTO> getGamesByStadium(int stadiumId);
     GameDetailDTO getGameDetailsByGameSeatId(int gameSeatId);
     List<GameSummaryDTO> getAllGamesWithSummary();
+    GameTeamDTO getTeamsByGameId(int gameId);
 }
