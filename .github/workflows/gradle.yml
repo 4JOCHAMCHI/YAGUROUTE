@@ -54,8 +54,8 @@ jobs:
         
     - name: Tagging created image and push
       env:
-        DOCKER_ID: ${{ secrets.DOCKER_ID }}
-        DOCKER_PWD: ${{ secrets.DOCKER_PWD }}
+        DOCKER_ID: ${{ secrets.DOCKER_ID_YAGUROUTE }}
+        DOCKER_PWD: ${{ secrets.DOCKER_PWD_YAGUROUTE }}
       run: |
         docker login -u "$DOCKER_ID" -p "$DOCKER_PWD"
         imagename="$DOCKER_ID"/yaguroute-app:$(date +%s)
