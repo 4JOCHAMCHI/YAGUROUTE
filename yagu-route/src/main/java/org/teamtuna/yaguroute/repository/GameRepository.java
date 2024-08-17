@@ -7,6 +7,7 @@ import org.teamtuna.yaguroute.aggregate.Game;
 import org.teamtuna.yaguroute.aggregate.GameSeat;
 import org.teamtuna.yaguroute.aggregate.Sellable;
 import org.teamtuna.yaguroute.dto.GameDetailDTO;
+import org.teamtuna.yaguroute.dto.GameSummaryDTO;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -31,6 +32,11 @@ public interface GameRepository extends JpaRepository<Game, Integer> {
     List<Game> findBySellable(Sellable sellable);
     List<Game> findByGameDateBefore(LocalDate date);
     List<Game> findByGameDateAfter(LocalDate date);
+
+    @Query("SELECT new org.teamtuna.yaguroute.dto.GameSummaryDTO(g.gameId, g.gameDate, g.gameTime, g.sellable, " +
+            "g.homeTeam.teamName, g.awayTeam.teamName, g.homeTeam.stadium.stadiumName) " +
+            "FROM Game g ORDER BY g.gameDate ASC, g.gameTime ASC")
+    List<GameSummaryDTO> findAllGamesWithSummary();
 
 }
 
