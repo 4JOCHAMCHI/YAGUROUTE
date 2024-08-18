@@ -4,6 +4,7 @@ kubectl create namespace redis
 helm apply -f ebs-storage.yaml
 
 helm repo add bitnami https://charts.bitnami.com/bitnami
+
 helm repo update
 
 helm install kafka-cluster bitnami/kafka -f kafka-values.yaml -n kafka
