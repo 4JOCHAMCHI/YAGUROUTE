@@ -12,7 +12,7 @@ import org.teamtuna.yaguroute.service.TeamService;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/teams")
+@RequestMapping("/api/teams")
 @Tag(name = "팀", description = "팀 관련 API")
 public class TeamController {
 

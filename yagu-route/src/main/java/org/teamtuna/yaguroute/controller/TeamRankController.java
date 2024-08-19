@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/ranking")
+@RequestMapping("/api/ranking")
 @Tag(name = "팀순위", description = "팀순위 관련 API")
 public class TeamRankController {
 
