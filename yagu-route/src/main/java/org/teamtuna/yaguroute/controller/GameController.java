@@ -11,7 +11,7 @@ import java.sql.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/game")
+@RequestMapping("/api/game")
 @Tag(name = "경기일정", description = "경기일정 관련 API")
 public class GameController {
 

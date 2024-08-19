@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/ticket")
+@RequestMapping("/api/ticket")
 @RequiredArgsConstructor
 @Tag(name = "예매", description = "예매 처리 API")
 public class TicketController {
