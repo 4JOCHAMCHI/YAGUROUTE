@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/member")
+@RequestMapping("/api/member")
 @Tag(name = "회원", description = "회원 관련 API")
 public class MemberController {
     private final MemberService memberService;

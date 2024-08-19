@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/seat")
+@RequestMapping("/api/seat")
 @RequiredArgsConstructor
 @Tag(name = "경기별 좌석", description = "경기별 좌석 관련 API")
 public class GameSeatController {
