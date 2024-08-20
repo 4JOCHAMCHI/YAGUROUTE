@@ -36,10 +36,13 @@ public class TicketServiceImpl implements TicketService{
 
     @Transactional
     public TicketDTO bookTicket(int memberId, int gameId, int seatId) {
+        System.out.println("redis 실행 전");
         if (!gameSeatService.isSeatOccupied(gameId, seatId)) {
             Member member = memberService.getMemberById(memberId).orElseThrow(() -> new EntityNotFoundException("Member Not Found"));
             GameSeat gameSeat = gameSeatService.convertToGameSeat(gameSeatService.getGameSeatByGameIdAndSeatId(gameId, seatId));
 
+            System.out.println(memberId);
+            System.out.println("redis 실행!");
             Ticket ticket = new Ticket(0, null, gameSeat.getGameSeatPrice(), member, gameSeat);
             TicketDTO result = new TicketDTO(ticketRepository.save(ticket));
 

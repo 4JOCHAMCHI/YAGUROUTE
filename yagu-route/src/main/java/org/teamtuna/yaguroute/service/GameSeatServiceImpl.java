@@ -29,8 +29,10 @@ public class GameSeatServiceImpl implements GameSeatService{
     public boolean isSeatOccupied(int gameId, int seatId) {
         Boolean isOccupied = redisTemplate.opsForSet().isMember(SET_KEY.concat(String.valueOf(gameId)), seatId);
 
+        System.out.println("redis 조회 실행!");
         // 캐시에 존재하지 않으면 DB 조회
         if (isOccupied == null || !isOccupied) {
+            System.out.println("DB 조회 실행");
             try {
                 isOccupied = getGameSeatByGameIdAndSeatId(gameId, seatId).isOccupied();
             } catch (EntityNotFoundException e) {
