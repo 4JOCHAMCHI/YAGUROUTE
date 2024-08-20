@@ -28,6 +28,7 @@ public class TicketController {
     public ResponseEntity<ResponseMessage> bookTicket(@PathVariable("memberId") int memberId, @PathVariable("gameId") int gameId, @PathVariable("seatId") int seatId) {
         TicketDTO booking = ticketService.bookTicket(memberId, gameId, seatId);
 
+        System.out.println("예매 요청");
         Map<String, Object> result = new HashMap<>();
         result.put("booking", booking);
 

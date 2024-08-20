@@ -15,6 +15,7 @@ public class ProfileController {
     @Operation(summary = "프로필 조회", description = "세션에 담긴 사용자의 프로필 조회")
     @GetMapping("/profile")
     public Member getProfile(HttpSession session) {
+        System.out.println("프로필 조회 요청");
         // email에 해당하는 member 정보 가져오기
         return (Member) session.getAttribute("profile");
     }
