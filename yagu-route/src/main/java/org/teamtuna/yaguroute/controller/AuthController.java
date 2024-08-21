@@ -60,6 +60,7 @@ public class AuthController {
 
             //TODO: memberService.find... insert... or upsert...
             if (memberService.getMemberByEmail(member.getMemberEmail()).isEmpty()) {
+//                if (true) throw new RuntimeException("!!!");
                 memberService.addMember(member);
             }
 
@@ -134,17 +135,12 @@ public class AuthController {
 //        requestCache.saveRequest(req, res);
 
         var referer = req.getHeader("Referer");
-
-        UriComponents uriComponents = UriComponentsBuilder
-                                    .newInstance()
-                                    .scheme("http")
-                                    .host("localhost")
-                                    .port("5137")
-                                    .path("/dashboard")
-                                    .build();
+        var redirectUrl = UriComponentsBuilder.fromHttpUrl(referer).replacePath("dashboard").build().toString();
+        System.out.println(redirectUrl);
+        String dashboard = referer.replace("signin", "dashboard");
 
         if (referer.contains("signin"))
-            session.setAttribute("original.referer", uriComponents);
+            session.setAttribute("original.referer", dashboard);
         else
             session.setAttribute("original.referer", referer);
         res.sendRedirect("/oauth2/authorization/" + registrationId);

@@ -1,0 +1,63 @@
+name: Java CI with Gradle
+
+on:
+  push:
+    branches: [ "feature/workflow-1" ]
+  pull_request:
+    branches: [ "feature/workflow-1" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+
+    # Configure Gradle for optimal use in GitHub Actions, including caching of downloaded dependencies.
+    # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@dbbdc275be76ac10734476cc723d82dfe7ec6eda # v3.4.2
+      with:
+         gradle-version: '8.5'
+    
+    - name: Check gradle version
+      run: gradle --version
+
+    - name: set application.yml
+      run: |
+        cd yagu-route
+        mkdir -p src/main/resources
+        echo "${{ secrets.APPLICATION_YML }}" | base64 --decode > src/main/resources/application.yml
+        find src
+
+    - name: Print working directory 
+      run: |
+        pwd
+        ls -al
+        
+    - name: Change directory into app directory and Gradle build
+      run: |
+        cd yagu-route
+        pwd
+        ls -al
+        ./gradlew bootJar
+        ls -al build/libs
+        docker build -t yaguroute-app .
+        
+    - name: Tagging created image and push
+      env:
+        DOCKER_ID: ${{ secrets.DOCKER_ID_YAGUROUTE }}
+        DOCKER_PWD: ${{ secrets.DOCKER_PWD_YAGUROUTE }}
+      run: |
+        docker login -u "$DOCKER_ID" -p "$DOCKER_PWD"
+        imagename="$DOCKER_ID"/yaguroute-app:$(date +%s)
+        docker image tag yaguroute-app $imagename
+        docker push $imagename
